@@ -50,6 +50,14 @@ describe IniReader::Base do
       reader[:section_name].class.should == Hash
       reader[:section_name][:key1].should == "val1"
     end
+
+    it "should not be added to any other section" do
+      section_string = "[section_name]\n" +
+        "[section_name2]\n" +
+        "key1=val1\n"
+      reader = IniReader::Base.new(section_string)
+      reader[:section_name][:key1].should == nil
+    end
   end
 
 end
