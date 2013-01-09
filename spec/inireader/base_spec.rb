@@ -19,6 +19,15 @@ describe IniReader::Base do
     end.should raise_error
   end
 
+  it "should ignore lines starting with ';'" do
+    section_string = "[section_name]\n" +
+      ";blah blah blah\n" +
+      "key1=val1\n"
+    lambda do
+      reader = IniReader::Base.new(section_string)
+    end.should_not raise_error
+  end
+
   describe "sections" do
     it "should add a section when it sees a section header" do
       section_string = "[section_name]\n"
