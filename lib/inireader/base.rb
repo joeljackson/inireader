@@ -7,7 +7,6 @@ module IniReader
 
     def self.parse(filename)
       reader = IniReader::Base.new
-      debugger
       reader.send(:parse, File.open(filename, "r"))
       return reader
     end
