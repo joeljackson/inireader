@@ -105,7 +105,6 @@ describe IniReader::Base do
   end
 
   it "should parse files" do
-    pending
     string = "[section]\n" +
       "key1=val1\n" + 
       "key2=val2\n" +
@@ -115,5 +114,10 @@ describe IniReader::Base do
       ";I am a comment. I can do anything here\n" +
       "key1=key2=val1\n" +
       "key3=val2\n"
+      outfile = File.new("./string", "w")
+      outfile.write(string)
+      reader = IniReader.parse("./string")
+      reader[:section].should == {key1: "val3", key2: "val2"}
+      reader[:section2].should == {key1:"key2=val1", key3:"val2"}
   end
 end
