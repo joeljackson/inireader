@@ -1,0 +1,3 @@
+describe IniReader
+
+end
