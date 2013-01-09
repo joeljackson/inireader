@@ -10,6 +10,14 @@ describe IniReader::Base do
     reader[:section_name].should == nil
   end
 
+  it "should fail on bad lines" do
+    section_string = "[section_name]\n" +
+      "blah blah blah\n" +
+      "key1=val1\n"
+    lambda do
+      reader = IniReader::Base.new(section_string)
+    end.should raise_error
+  end
 
   describe "sections" do
     it "should add a section when it sees a section header" do
