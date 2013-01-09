@@ -1,3 +1,1 @@
-describe IniReader
-
-end
+require 'ini_reader'
