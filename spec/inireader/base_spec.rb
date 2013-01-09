@@ -10,9 +10,21 @@ describe IniReader::Base do
     reader[:section_name].should == nil
   end
 
-  it "should add a section when it sees a section header" do
-    section_string = "[section_name]\n"
-    reader = IniReader::Base.new(section_string)
-    reader[:section_name].should_not == nil
+
+  describe "sections" do
+    it "should add a section when it sees a section header" do
+      section_string = "[section_name]\n"
+      reader = IniReader::Base.new(section_string)
+      reader[:section_name].should_not == nil
+    end
+
+    it "should allow for different section names" do
+      section_string = "[section_name]\n" +
+        "[section_name_2]\n"
+      reader = IniReader::Base.new(section_string)
+      reader[:section_name].should_not == nil
+      reader[:section_name_2].should_not == nil
+    end
   end
+
 end
