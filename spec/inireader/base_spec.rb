@@ -28,6 +28,15 @@ describe IniReader::Base do
     end.should_not raise_error
   end
 
+  it "should allow empty lines" do
+    section_string = "[section_name]\n" +
+      "\n" +
+      "key1=val1\n"
+    lambda do
+      reader = IniReader::Base.new(section_string)
+    end.should_not raise_error
+  end
+
   describe "sections" do
     it "should add a section when it sees a section header" do
       section_string = "[section_name]\n"
@@ -93,5 +102,18 @@ describe IniReader::Base do
       reader = IniReader::Base.new(section_string)
       reader[:section_name][:key1].should == "val1"
     end
+  end
+
+  it "should parse files" do
+    pending
+    string = "[section]\n" +
+      "key1=val1\n" + 
+      "key2=val2\n" +
+      "key1=val3\n" +
+      "\n" +
+      "[section2]\n" +
+      ";I am a comment. I can do anything here\n" +
+      "key1=key2=val1\n" +
+      "key3=val2\n"
   end
 end

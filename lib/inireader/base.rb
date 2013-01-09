@@ -22,6 +22,8 @@ module IniReader
           @section_hash[matchdata[1].to_sym] = current_section
         elsif ( matchdata = line.match(/^([^=]*)=(.*)$/) )
           current_section[matchdata[1].to_sym] = matchdata[2].to_s
+        elsif line.strip == ""
+          next
         else
           raise Exception("Could not parse line: #{line}")
         end
