@@ -3,7 +3,8 @@ inireader
 
 Because, sadly, not every configuration file is in yml.
 
-Seriously barebones ini reader.
+Seriously barebones ini reader. It doesn't do much and is not robust or that trustworthy.
+That having been said, nothing else was really suiting my needs.
 
 Reads from:
 

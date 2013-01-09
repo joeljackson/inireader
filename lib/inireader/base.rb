@@ -14,8 +14,11 @@ module IniReader
     def parse(string)
       io = StringIO.new(string)
       io.each do |line|
-        if ( matchdata = line.match(/\[(.*)\]/) ) != nil
+        if ( matchdata = line.match(/^\[(.+)\]$/) ) != nil
           @section_hash[matchdata[1].to_sym] = {}
+        elsif ( matchdata = line.match(/^([^=]*)=(.*)$/) )
+        else
+          raise Exception("Could not parse line: #{line}")
         end
       end
     end

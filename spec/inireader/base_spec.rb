@@ -25,6 +25,13 @@ describe IniReader::Base do
       reader[:section_name].should_not == nil
       reader[:section_name_2].should_not == nil
     end
+
+    it "should force the section to have a name" do
+      section_string = "[]\n"
+      lambda do
+        reader = IniReader::Base.new(section_string)
+      end.should raise_error
+    end
   end
 
   describe "pairs" do
