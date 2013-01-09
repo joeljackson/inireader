@@ -27,4 +27,12 @@ describe IniReader::Base do
     end
   end
 
+  describe "pairs" do
+    it "should not crash when assigning a pair" do
+      section_string = "[section_name]\n" +
+        "key1=val1\n"
+      reader = IniReader::Base.new(section_string)
+    end
+  end
+
 end
