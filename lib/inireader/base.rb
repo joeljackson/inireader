@@ -2,7 +2,14 @@ module IniReader
   class Base
     def initialize( string = '')
       @section_hash = {}
-      parse(string)
+      parse(StringIO.new(string))
+    end
+
+    def self.parse(filename)
+      reader = IniReader::Base.new
+      debugger
+      reader.send(:parse, File.open(filename, "r"))
+      return reader
     end
 
     #returns the hash for a section of the inifile
@@ -11,8 +18,7 @@ module IniReader
     end
 
     private
-    def parse(string)
-      io = StringIO.new(string)
+    def parse(io)
       current_section = nil
       io.each do |line|
         if line[0] == ';'

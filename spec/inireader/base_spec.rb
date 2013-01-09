@@ -116,7 +116,8 @@ describe IniReader::Base do
       "key3=val2\n"
       outfile = File.new("./string", "w")
       outfile.write(string)
-      reader = IniReader.parse("./string")
+      outfile.close
+      reader = IniReader::Base.parse("./string")
       reader[:section].should == {key1: "val3", key2: "val2"}
       reader[:section2].should == {key1:"key2=val1", key3:"val2"}
   end
