@@ -16,7 +16,7 @@ module IniReader
       current_section = nil
       io.each do |line|
         if ( matchdata = line.match(/^\[(.+)\]$/) ) != nil
-          current_section = {}
+          current_section = @section_hash[matchdata[1].to_sym] || {}
           @section_hash[matchdata[1].to_sym] = current_section
         elsif ( matchdata = line.match(/^([^=]*)=(.*)$/) )
           current_section[matchdata[1].to_sym] = matchdata[2].to_s

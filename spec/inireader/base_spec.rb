@@ -62,12 +62,19 @@ describe IniReader::Base do
     it "should add keys in repeated sections with previous sections" do
       section_string = "[section_name]\n" +
         "key1=val1\n" +
-        "[section_name2]\n" +
-        "key2=val2\n" +
         "[section_name]\n" +
         "key3=val3\n"
       reader = IniReader::Base.new(section_string)
       reader[:section_name][:key3].should == "val3"
+    end
+
+    it "should not overwrite previous sections when they are repeated" do
+      section_string = "[section_name]\n" +
+        "key1=val1\n" +
+        "[section_name]\n" +
+        "key3=val3\n"
+      reader = IniReader::Base.new(section_string)
+      reader[:section_name][:key1].should == "val1"
     end
   end
 end
