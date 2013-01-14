@@ -30,7 +30,7 @@ class IniReader
       elsif line.strip == ""
         next
       else
-        raise Exception("Could not parse line: #{line}")
+        raise Exception.new("Could not parse line: #{line}")
       end
     end
   end
